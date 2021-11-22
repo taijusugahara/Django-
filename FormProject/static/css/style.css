@@ -1,0 +1,27 @@
+.mail-class{
+  width: 70%;
+  color: blue;
+}
+
+/* ラベルのcss */
+label[for ='id_mail']{
+  color: red;
+}
+
+#id_job{
+  list-style: none;
+}
+.hobbies_class{
+  list-style: none;
+}
+
+
+.c_blue{
+  color: blue;
+}
+.c_red{
+  color: red;
+}
+/* .errorlist{
+  list-style: none;
+} */

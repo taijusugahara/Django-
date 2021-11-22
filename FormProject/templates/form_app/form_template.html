@@ -1,0 +1,45 @@
+<form method="POST">
+  {%csrf_token%}
+  {{form.non_field_errors}}
+  {% if form.errors %}
+    {% for key,value in form.errors.items%}
+      {% if key != '__all__' %}
+      <p>{{key}} : {{value}}</p>
+      {%endif%}
+    {% endfor%}
+  {%endif%}
+
+  <!-- <table> -->
+    <!-- {{form.as_table}} -->
+  <div class="c_blue">
+    {{form.name.label}}:{{form.name}}
+  </div>
+  {% if form.name.errors %}
+  <p class="c_red">
+  {{form.name.errors.as_text}}
+  </p>
+  {% endif %}
+
+  <div class="c_blue">
+    {{form.title.label}}:{{form.title}}
+  </div>
+  {% if form.title.errors %}
+  <p class="c_red">
+  {{form.title.errors.as_text}}
+  </p>
+  {% endif %}
+
+  <div class="c_blue">
+    {{form.memo.label}}:{{form.memo}}
+  </div>
+  {% if form.memo.errors %}
+  <p class="c_red">
+  {{form.memo.errors.as_text}}
+  </p>
+  {% endif %}
+  
+  
+    
+  <!-- </table> -->
+  <input type="submit" value="送信">
+</form>

@@ -1,0 +1,10 @@
+{% extends "base.html" %} {#継承#}
+
+{% block title %} 
+Sample2 {{block.super}}
+{% endblock%}
+
+{% block content%}
+<p>Sample2</p>
+<p>テンプレートを継承しています 2番目。</p>
+{% endblock %}

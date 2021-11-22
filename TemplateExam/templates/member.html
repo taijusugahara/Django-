@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title%}メンバー詳細 {{block.super}} {%endblock%}
+
+{% block content %}
+{% load static %}
+{% load custom_tags %}
+
+<h1>メンバー詳細画面</h1>
+<p>名前 : {{member.name}}</p>
+<img src="{% static member.picture_path %}" alt="">
+<p>入部日 : {{member.join_at}}</p>
+<p>入部から：{{member.join_at | caliculate_date_time_to_now}}</p>
+
+{% endblock %}

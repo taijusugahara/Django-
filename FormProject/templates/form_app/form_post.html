@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf8'>
+    <title>Form</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+  </head>
+
+  <body>
+   {% include "form_app/form_template2.html" with as_ul=True %}
+  </body>
+
+</html>

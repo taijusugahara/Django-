@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生徒情報index</title>
+</head>
+<body>
+  <h1>生徒一覧ページ</h1>
+  
+  <a href="{% url 'form_app:create' %}">新しく生徒情報を入力する</a>
+
+  {% for student in students %}
+    <div style="display:flex" >
+      名前:{{student.name}}歳
+      年齢:{{student.age}}歳 
+      学年:{{student.grade}}年
+      <img src="{{student.picture.url}}" width="150px" height="100px">
+      <a href="{% url 'form_app:update' id=student.id %}">変更する</a>　
+      <a href="{% url 'form_app:destroy' id=student.id %}">削除する</a>
+
+    </div>
+    
+
+  {% endfor %}
+
+</body>
+</html>
