@@ -1,0 +1,13 @@
+{% load plotly %}
+{% load boost %}
+<h1>カスタムテンプレートタグ</h1>
+<!-- zipを使うにはpip install等する必要がある -->
+<!-- 詳しくはこちら -->
+<!-- https://chuna.tech/detail/81/ -->
+
+{% autoescape off %}
+{% for l in list %}
+<p>グラフ</p>
+<p>{% plotly  l2 l %}</p>
+{% endfor %}
+{% endautoescape %}
