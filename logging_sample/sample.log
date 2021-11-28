@@ -1,0 +1,9 @@
+2021-11-27 10:57:00,095-99830-WARNING-warning.log
+2021-11-27 10:57:00,096-99830-ERROR-error.log
+2021-11-27 10:57:00,096-99830-CRITICAL-critical.log
+2021-11-27 10:57:00,096-99830-ERROR-user = Taro raised error
+2021-11-27 10:57:00,096-99830-ERROR-division by zero
+Traceback (most recent call last):
+  File "01_logging_sample.py", line 21, in <module>
+    c = a/b
+ZeroDivisionError: division by zero

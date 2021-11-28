@@ -1,0 +1,9 @@
+2021-11-27 11:15:49,596-__main__-ERROR-エラーログ
+2021-11-27 11:15:49,596-__main__-CRITICAL-クリティカルログ
+2021-11-27 11:17:24,132-__main__-ERROR-エラーログ
+2021-11-27 11:17:24,132-__main__-CRITICAL-クリティカルログ
+2021-11-27 11:17:24,132-__main__-ERROR-division by zero
+Traceback (most recent call last):
+  File "02_logging_sample.py", line 37, in <module>
+    c = a / b
+ZeroDivisionError: division by zero

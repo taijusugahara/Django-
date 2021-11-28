@@ -1,0 +1,2 @@
+2021-11-27 15:08:07,018 INFO [/Users/taijusugahara/projects/Django入門/class_based_view/class_based_view/middleware.py:25] /store/delete_book/3: 0.0040090084075927734s
+2021-11-27 15:08:15,857 INFO [/Users/taijusugahara/projects/Django入門/class_based_view/class_based_view/middleware.py:25] /store/list_books/: 0.0006253719329833984s

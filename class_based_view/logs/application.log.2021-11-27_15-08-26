@@ -1,0 +1,4 @@
+2021-11-27 15:08:26,568 INFO [/Users/taijusugahara/projects/Django入門/class_based_view/class_based_view/middleware.py:11] /store/edit_book/2
+2021-11-27 15:08:32,693 INFO [/Users/taijusugahara/projects/Django入門/class_based_view/class_based_view/middleware.py:11] /store/edit_book/2
+2021-11-27 15:08:32,717 INFO [/Users/taijusugahara/projects/Django入門/class_based_view/class_based_view/middleware.py:11] /store/edit_book/2
+2021-11-27 15:08:32,780 INFO [/Users/taijusugahara/projects/Django入門/class_based_view/class_based_view/middleware.py:11] /media/picture/%E6%A1%83.jpg

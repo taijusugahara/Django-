@@ -15,6 +15,12 @@ from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 
+import logging
+from django.http import Http404
+
+application_logger = logging.getLogger('application-logger')
+error_logger = logging.getLogger('error-logger')
+
 
 class IndexView(View):
   def get(self,request,*args,**kwargs):
@@ -37,7 +43,11 @@ class HomeView(TemplateView):
   
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    print(kwargs)
+    # print(kwargs)
+    application_logger.debug('ホーム画面を表示します。')
+    if kwargs.get('name') == 'ああああ':
+        # error_logger.error('この名前は利用できません')
+        raise Http404('この名前は利用できません')
     context['name'] = kwargs.get('name')
     context['time'] = datetime.now()
     return context
