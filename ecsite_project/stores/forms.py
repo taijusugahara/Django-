@@ -41,6 +41,12 @@ class AddressInputForm(forms.ModelForm):
             address.validate_unique()
             address.save()
         except ValidationError as e:
-            pass
+          address = get_object_or_404(
+            Addresses, user=self.user,
+            prefecture=address.prefecture,
+            zip_code=address.zip_code,
+            address=address.address
+          )
+          pass
         cache.set(f'address_user_{self.user.id}', address)
         return address
