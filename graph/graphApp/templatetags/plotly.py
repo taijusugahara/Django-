@@ -10,6 +10,7 @@ def plotly(l1,l2):
         # layout=go.Layout(width=500, height=400)
     ))
   fig.update_layout(
+    height=250,
     margin=dict(l=20,r=20,t=20,b=20)
   )
   
