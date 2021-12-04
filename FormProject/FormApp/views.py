@@ -7,6 +7,9 @@ import os
 from . import forms
 from . models import ModelSetPost
 
+# from django.views.generic.base import(
+#   View
+# )
 # Create your views here.
 
 def index(request):
@@ -85,3 +88,18 @@ def upload_model_form(request):
     form = forms.UserForm()
   return render(request,'form_app/upload_model_form.html',
   context={'form':form, 'user':user})
+
+
+def Search(request):
+  form = forms.SearchForm()
+  url = ""
+  if request.method =='POST':
+    form = forms.SearchForm(request.POST)
+    if form.is_valid(): #バリデーション
+      print('バリデーション成功')
+      url = form.cleaned_data['url']
+      print(form.cleaned_data['url'])
+  return render(request,'form_app/search.html', context={
+    'form':form,
+    'url' : url
+  })
