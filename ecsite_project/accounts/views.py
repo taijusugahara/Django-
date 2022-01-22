@@ -14,6 +14,9 @@ from django.contrib.auth.views import LoginView, LogoutView
 class HomeView(TemplateView):
   template_name = 'home.html'
 
+def func_view(request):
+  return render(request,'home.html')
+
 class RegistUserView(CreateView):
   template_name = 'regist.html'
   form_class = RegistForm
