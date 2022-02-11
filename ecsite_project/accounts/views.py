@@ -8,14 +8,31 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 
+import aiohttp
+import asyncio
+import time
 
 # Create your views here.
 
 class HomeView(TemplateView):
   template_name = 'home.html'
 
-def func_view(request):
+async def func_view(request):
+  start_time = time.time()
+  await main()
+  end_time = time.time()
+  howlong = end_time - start_time
+  print(f"かかった時間: {howlong}")
   return render(request,'home.html')
+
+
+async def main():
+  async with aiohttp.ClientSession() as session:
+    for number in range(1, 151):
+        pokemon_url = f'https://pokeapi.co/api/v2/pokemon/{number}'
+        async with session.get(pokemon_url) as resp:
+            pokemon = await resp.json()
+            print(pokemon['name'])
 
 class RegistUserView(CreateView):
   template_name = 'regist.html'
