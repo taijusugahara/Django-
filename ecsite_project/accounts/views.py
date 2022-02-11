@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 
+import requests
 import aiohttp
 import asyncio
 import time
@@ -17,22 +18,52 @@ import time
 class HomeView(TemplateView):
   template_name = 'home.html'
 
-async def func_view(request):
+async def asny_test(request):
   start_time = time.time()
-  await main()
+  pokemon_lists = await main()
   end_time = time.time()
   howlong = end_time - start_time
   print(f"かかった時間: {howlong}")
-  return render(request,'home.html')
+  return render(request,'home.html',context={
+    "lists" : pokemon_lists
+  })
 
 
 async def main():
+  lists = []
+  poke_lists = []
   async with aiohttp.ClientSession() as session:
     for number in range(1, 151):
-        pokemon_url = f'https://pokeapi.co/api/v2/pokemon/{number}'
-        async with session.get(pokemon_url) as resp:
-            pokemon = await resp.json()
-            print(pokemon['name'])
+        url = f'https://pokeapi.co/api/v2/pokemon/{number}'
+        lists.append(asyncio.ensure_future(get_pokemon(session, url)))
+        # async with session.get(pokemon_url) as resp:
+        #     pokemon = await resp.json()
+        #     print(pokemon['name'])
+        #     lists.append(pokemon['name'])
+    original_pokemon = await asyncio.gather(*lists)
+    for pokemon in original_pokemon:
+      print(pokemon)
+      poke_lists.append(pokemon)
+
+  return poke_lists
+
+async def get_pokemon(session, url):
+    async with session.get(url) as resp:
+        pokemon = await resp.json()
+        return pokemon['name']
+
+
+def requests_test(request):
+  start_time = time.time()
+  for number in range(1, 151):
+    url = f'https://pokeapi.co/api/v2/pokemon/{number}'
+    resp = requests.get(url)
+    pokemon = resp.json()
+    print(pokemon['name'])
+    end_time = time.time()
+    howlong = end_time - start_time
+    print(f"かかった時間requests: {howlong}")
+  return render(request,'home.html')
 
 class RegistUserView(CreateView):
   template_name = 'regist.html'
