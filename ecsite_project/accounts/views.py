@@ -33,7 +33,7 @@ async def main():
   lists = []
   poke_lists = []
   async with aiohttp.ClientSession() as session:
-    for number in range(1, 151):
+    for number in range(1, 100):
         url = f'https://pokeapi.co/api/v2/pokemon/{number}'
         lists.append(asyncio.ensure_future(get_pokemon(session, url)))
         # async with session.get(pokemon_url) as resp:
@@ -55,7 +55,7 @@ async def get_pokemon(session, url):
 
 def requests_test(request):
   start_time = time.time()
-  for number in range(1, 151):
+  for number in range(1, 2):
     url = f'https://pokeapi.co/api/v2/pokemon/{number}'
     resp = requests.get(url)
     pokemon = resp.json()
