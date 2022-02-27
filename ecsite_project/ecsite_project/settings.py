@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+
 from pathlib import Path
 import os
 
@@ -27,7 +28,7 @@ SECRET_KEY = 'ros2^(a&scqibf3hbad+zhhz$&2$cqom=h(ky&&+akc(3wp45^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"] #change
 
 
 # Application definition
@@ -40,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'easy_pjax',
+    "whitenoise.runserver_nostatic", #add
     'allauth',
     'accounts',
     'allauth.account',
@@ -52,6 +53,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    #↓ videoがsafari,iosで動作しない問題を解決する。range header問題
+    'middle_range.RangesMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -81,9 +84,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            'builtins': [
-                "easy_pjax.templatetags.pjax_tags"
-            ],
+            # 'builtins': [
+            #     "easy_pjax.templatetags.pjax_tags"
+            # ],
         },
     },
 ]
@@ -139,8 +142,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = STATIC_DIR
 STATICFILES_DIRS = [
-    STATIC_DIR,
+    # STATIC_DIR,
 ]
 
 AUTH_USER_MODEL = 'accounts.Users'
@@ -171,3 +175,5 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'

@@ -1,4 +1,4 @@
-{% extends 'base.html,pjax_base.html'|pjax:request %}
+{% extends 'base.html'%}
 {% block content %}
 <h1>ホーム画面です</h1>
 
@@ -9,8 +9,24 @@
 {{one}},
 {% endfor %}
 
+
+<a href="{% url 'accounts:video' %}">video</a>
+<video width="200px" height="200px" playsinline muted controls src="/media/fv.mp4"></video>
+
+<video width="200px" height="200px" playsinline muted controls src="/media/Storm.mp4"></video>
+<div>
+  <a href="/media/fv.mp4">video改良</a>
+  <a href="/media/Storm.mp4">storm video</a>
+</div>
+
+<button id="button1">button1</button>
+<button id="button2">button2</button>
+
+<a href="">video2</a>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>
+  /*
 $(function(){
   $('#input_field').focus();
 })
@@ -20,6 +36,8 @@ $(function(){
     $('#input_field').focus();
   })
 })
+  */
+
 
 
 let is_drag = false
@@ -74,19 +92,26 @@ $(function(){
 
 
 
+</script>
+<script>
+  var global = "global1"
+  $(function(){
+    $("#button1").on('click',function(){
+    global = "global2"
+      console.log(global)
+    })
+  })
 
+  $(function(){
+    $("#button2").on('click',function(){
+      console.log(global)
+    })
+  })
 
-
+  console.log(global)
+  
 </script>
 {% endblock %}
 
-
-<!-- $(function(){
-  $(document).on('click',function(){
-    console.log("clickしています。")
-    $('#input_field').on('blur');
-    $('#input_field').focus()
-  })
-}) -->
 
 mousedown1(blur機能off)->click1()->mousedown2->click2()

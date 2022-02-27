@@ -1,3 +1,4 @@
+from turtle import down, settiltangle
 from django.shortcuts import redirect, render
 from django.views.generic.edit import CreateView,FormView
 from django.views.generic.base import TemplateView,View
@@ -12,8 +13,42 @@ import requests
 import aiohttp
 import asyncio
 import time
+from pathlib import Path
+import os
+import io
+# from ranged_response import RangedFileResponse
+from ranged_fileresponse import RangedFileResponse
+from django.http import FileResponse
+
+import requests
+import urllib
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+def video(request):
+  filename = 'media/fv.mp4'
+  
+  # file_link ='media/fv.mp4'
+  # response = RangedFileResponse(request, open(filename, 'r'), content_type='video')
+  # response = RangedFileResponse(request, open(filename, 'rb'),content_type='video')
+  
+  # response = FileResponse(open(filename, 'rb'))
+
+  
+  # response['Content-Length'] = os.path.getsize(filename)
+  # response.setHeader("accept-ranges", "bytes")
+  # response['Content-Disposition'] = 'attachment; filename="%s"' % filename
+
+
+  ####download
+
+
+  return FileResponse(open(filename, "rb"), as_attachment=True)
+
 
 # Create your views here.
+
+
 
 class HomeView(TemplateView):
   template_name = 'home.html'
@@ -57,13 +92,17 @@ def requests_test(request):
   start_time = time.time()
   for number in range(1, 2):
     url = f'https://pokeapi.co/api/v2/pokemon/{number}'
+    print(BASE_DIR)
     resp = requests.get(url)
     pokemon = resp.json()
     print(pokemon['name'])
     end_time = time.time()
     howlong = end_time - start_time
     print(f"かかった時間requests: {howlong}")
-  return render(request,'home.html')
+
+  return render(request,'home.html',context={
+      'BASE_DIR' : BASE_DIR
+    })
 
 class RegistUserView(CreateView):
   template_name = 'regist.html'
