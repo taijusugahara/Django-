@@ -1,0 +1,101 @@
+<p>Hello</p>
+
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <p>
+  <table>
+    {{form.as_table}}
+  </table>
+  <p><input class="upload" type="submit" value="submit"></p>
+  <div class="message"></div>
+  <progress style="width:50%; height:40px;" value="0" id="prog" max=100></progress>(<span id="pv" style="color:#00b200">0%</span>)
+  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script>
+      function getCookie(name) {
+          var cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+              var cookies = document.cookie.split(';');
+              for (var i = 0; i < cookies.length; i++) {
+                  var cookie = jQuery.trim(cookies[i]);
+                  // Does this cookie string begin with the name we want?
+                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                      break;
+                  }
+              }
+          }
+          return cookieValue;
+      }
+
+      var csrftoken = getCookie('csrftoken');
+
+      function csrfSafeMethod(method) {
+          // these HTTP methods do not require CSRF protection
+          return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+      }
+
+      $.ajaxSetup({
+          beforeSend: function (xhr, settings) {
+              if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                  xhr.setRequestHeader("X-CSRFToken", csrftoken);
+              }
+          }
+      });
+
+  </script>
+  <script>
+  $(function () {
+    $('.upload').on('click', function (evt) {
+        evt.preventDefault();
+        var formData = new FormData();
+        formData.append("file", $("#id_file")[0].files[0]);
+        formData.append("title", $("#id_title").val());
+        console.log($("#id_title").val())
+        var progressBar = document.getElementById('prog');
+        var progressValue = document.getElementById('pv');
+        $.ajax({
+            url: "{% url 'file:file_upload' %}",
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            async: true,
+            data: formData,
+            xhr : function(){
+                XHR = $.ajaxSettings.xhr();
+                if(XHR.upload){
+                    XHR.upload.addEventListener('progress',function(e){
+                        var progVal = parseInt(e.loaded/e.total*10000)/100 ;
+                        progressBar.value = progVal;
+                        progressValue.innerHTML = progVal + '%';
+
+                    }, false);
+                }
+                return XHR;
+            },
+            success: function (d) {
+              console.log(d.is_ok)
+                if(d.is_ok == 'ok'){
+                  $('.message').append('success\n');
+                window.location.href = "{% url 'file:success' %}";
+                }else{
+                  if(d.errors){
+                    $.each(d.errors, function(index, value){
+                        $('.message').append(`<p>${value}</p>`)
+                    })
+                  }
+                  $('.message').append('failure\nもう一度実行してください。')
+                  progressBar.value = 0;
+                  progressValue.innerHTML = 0 + '%';
+                }
+                
+            },
+            error: function () {
+                $('.message').append('failure\n')
+            }
+        });
+    });
+});
+</script>
+</form>
