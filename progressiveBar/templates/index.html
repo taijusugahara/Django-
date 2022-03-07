@@ -75,10 +75,9 @@
                 return XHR;
             },
             success: function (d) {
-              console.log(d.is_ok)
                 if(d.is_ok == 'ok'){
                   $('.message').append('success\n');
-                window.location.href = "{% url 'file:success' %}";
+                    window.location.href = "{% url 'file:success' %}";
                 }else{
                   if(d.errors){
                     $.each(d.errors, function(index, value){
@@ -93,6 +92,8 @@
             },
             error: function () {
                 $('.message').append('failure\n')
+                progressBar.value = 0;
+                progressValue.innerHTML = 0 + '%';
             }
         });
     });

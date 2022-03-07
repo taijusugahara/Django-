@@ -1,1 +1,13 @@
 <h1>成功しました！！！</h1>
+{% for file in files %}
+<li><a href="{{file.file.url}}">{{file.file.name}}</a></li>
+<form action="{% url 'file:filename_update' %}" method="POST">
+  {% csrf_token %}
+  <input type="text" name="filename" value="{{file.file.name}}" />
+  <input type="hidden" name="id" value="{{file.pk}}" />
+  <input type="submit" value="送信">
+</form>
+
+
+
+{% endfor %}%
