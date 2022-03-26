@@ -10,17 +10,20 @@ from django.http import HttpResponse
 
 def file_upload(request):
   form = forms.FileUpload()
-
+  print('aaa')
   if request.method == 'POST':
     d={}
+    print('post通信')
     form = forms.FileUpload(request.POST, request.FILES)
     if form.is_valid():
       form.save()
       d['is_ok'] = "ok"
+      print('ok')
     else:
       print(form.errors)
       d['is_ok'] = 'no'
       d['errors'] = form.errors
+      print('out')
     return JsonResponse(d)
 
   return render(request,'index.html',context={
@@ -51,7 +54,8 @@ def filename_update(request):
     else:
       file_obj.file.name = filename
       file_obj.save()
-      os.rename("media/" + file_before_name,"media/" + filename)
+      # os.rename("media/" + file_before_name,"media/" + filename)
+      os.rename("/Users/taijusugahara/django_static/progre/media/" + file_before_name,"/Users/taijusugahara/django_static/progre/media/" + filename)
 
 
 

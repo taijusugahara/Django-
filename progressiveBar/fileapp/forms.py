@@ -7,6 +7,7 @@ from .models import File
 class FileUpload(forms.ModelForm):
   title = forms.CharField(max_length=20)
   file = forms.FileField()
+  # file = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
   
   class Meta:
        model  = File
