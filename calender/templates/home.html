@@ -1,0 +1,117 @@
+{% extends 'base.html'%}
+{% block content %}
+<h1>ホーム画面です</h1>
+
+<input id="input_field" type="text">
+
+<p>asynicio</p>
+{% for one in lists %}
+{{one}},
+{% endfor %}
+
+
+<a href="{% url 'accounts:video' %}">video</a>
+<video width="200px" height="200px" playsinline muted controls src="/media/fv.mp4"></video>
+
+<video width="200px" height="200px" playsinline muted controls src="/media/Storm.mp4"></video>
+<div>
+  <a href="/media/fv.mp4">video改良</a>
+  <a href="/media/Storm.mp4">storm video</a>
+</div>
+
+<button id="button1">button1</button>
+<button id="button2">button2</button>
+
+<a href="">video2</a>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+  /*
+$(function(){
+  $('#input_field').focus();
+})
+
+$(function(){
+  $('#input_field').on('blur',function(){
+    $('#input_field').focus();
+  })
+})
+  */
+
+
+
+let is_drag = false
+let is_mousemove_done = false
+
+$(function(){
+  $(document).on('mousedown',function(){
+    is_drag = true;
+    
+    console.log("mousedownしています。")
+    if(is_mousemove_done === true){
+      $('#input_field').on('blur');
+      $('#input_field').focus();
+    }
+  })
+})
+
+$(function(){
+  $(document).on('mouseup',function(){
+    is_drag = false;
+    console.log("mouseupしています。")
+    
+  })
+})
+
+$(function(){
+  $(document).on('mousemove',function(){
+    if(is_drag === true){
+      $('#input_field').off('blur');
+      is_mousemove_done = true
+      console.log("mousemoveしています。")
+    }
+    
+  })
+})
+
+$(function(){
+  $(document).on('mouseleave',function(){
+    if(is_drag === false){
+      $('#input_field').off('blur');
+      is_mousemove_done = true
+      console.log("mouseoutしています。")
+    }
+    
+  })
+})
+
+//通常マウス時 mousedown -> mouseup (mousemoveなし)=>mousemove 直前がmouseupで終わっている
+//mousemove時 mousedown-> mousemove-> mouseup 直前がmousedownで終わっている
+
+
+
+
+
+</script>
+<script>
+  var global = "global1"
+  $(function(){
+    $("#button1").on('click',function(){
+    global = "global2"
+      console.log(global)
+    })
+  })
+
+  $(function(){
+    $("#button2").on('click',function(){
+      console.log(global)
+    })
+  })
+
+  console.log(global)
+  
+</script>
+{% endblock %}
+
+
+mousedown1(blur機能off)->click1()->mousedown2->click2()
