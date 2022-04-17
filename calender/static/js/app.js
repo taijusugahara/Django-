@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
     },
       // initialView: 'dayGridMonth',
-      businessHours: true,
+      // businessHours: true,
       contentHeight: 'auto',
       navLinks: true,
       // locale: 'ja',
@@ -35,15 +35,11 @@ document.addEventListener('DOMContentLoaded', function () {
       // },
 
       // selectLongPressDelay:0,
-      // views: {
-      //   timeGridDay:{
-      //     viewDidMount:function(date){
-      //       // alert(date)
-      //       console.log(date.view.currentStart)
-      //     }
-          
-      //   }
-      // },
+      views: {
+        dayGridMonth:{
+          dayMaxEvents:2,
+        }
+      },
       datesSet:function(date){
         $(".day").addClass('none')
         if(date.view.type == "timeGridDay"){
@@ -79,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // })
 
         },
+        
   });
 
  
