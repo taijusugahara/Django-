@@ -2,13 +2,15 @@ from unicodedata import name
 from django.urls import path
 from .views import(
   RegistUserView, HomeView, UserLoginView,
-  UserLogoutView, UserView, asny_test, requests_test, user_all,video,user_all,calender
+  UserLogoutView, UserView, asny_test, requests_test, user_all,video,user_all,calender,
+  redirect_view
 )
 
 app_name ='accounts'
 
 urlpatterns = [
     path('home/', HomeView.as_view(), name='home'),
+    path('redirect/', redirect_view, name='redirect_view'),
     path('regist/', RegistUserView.as_view(), name='regist'),
     path('user_login/', UserLoginView.as_view(), name='user_login'),
     path('user_logout/', UserLogoutView.as_view(), name='user_logout'),

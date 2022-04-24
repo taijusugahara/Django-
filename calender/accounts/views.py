@@ -55,6 +55,10 @@ def video(request):
 class HomeView(TemplateView):
   template_name = 'home.html'
 
+def redirect_view(request):
+  print('redirect do')
+  return redirect("/accounts/home#box2")
+
 async def asny_test(request):
   start_time = time.time()
   pokemon_lists = await main()
