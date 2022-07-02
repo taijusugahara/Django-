@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+<style id="jsbin-css">
+.app-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+header, footer, main {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+
+header {
+  top: 0;
+}
+
+footer {
+  bottom: 0;
+}
+
+header, footer {
+  text-align: center;
+  background-color: blue;
+  color: white;
+  height: 48px;
+  line-height: 48px;
+}
+
+footer input {
+  width: 50%;
+}
+
+main {
+  top: 48px;
+  bottom: 48px;
+  background-color: yellow;
+  color: red;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.safari.keyboard .app-container {
+  bottom: 270px;
+}
+
+/*To prevent auto-zoom in Safari*/
+.safari input[type='text'] {
+  font-size: 16px;
+}
+
+</style>
+</head>
+<body>
+  <div class='app-container'>
+  <header>
+    Fixed Header
+  </header>
+  <main>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>     
+  </main>
+  <footer>
+    <input id="inputBox" type="text"/>   
+  </footer>
+  </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  setPlatformInfo();
+  var inputBox = document.querySelector('.safari #inputBox');
+  if(inputBox) {
+    inputBox.addEventListener('focus', function(e) {
+      document.body.classList.add('keyboard');
+      setTimeout(function() {
+        window.scrollTo(0, 0);
+      }, 200);
+    });
+    
+    inputBox.addEventListener('blur', function(e) {
+      document.body.classList.remove('keyboard');
+    });
+  }
+});
+
+function setPlatformInfo() {
+  var ua = navigator.userAgent.toLowerCase(); 
+  if (ua.indexOf('safari') != -1) { 
+    if (ua.indexOf('chrome') > -1) {
+      document.body.classList.add('chrome');
+    } else {
+      document.body.classList.add('safari');
+    }
+  }
+}
+</script>
+
+</body>
+</html>

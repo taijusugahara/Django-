@@ -27,6 +27,13 @@ from .models import Users
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+def position_fix(request):
+  return render(request,"position_fix.html")
+
+def position_fix2(request):
+  return render(request,"position_fix2.html")
+
+
 def video(request):
   filename = 'media/fv.mp4'
   

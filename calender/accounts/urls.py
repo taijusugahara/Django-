@@ -3,12 +3,14 @@ from django.urls import path
 from .views import(
   RegistUserView, HomeView, UserLoginView,
   UserLogoutView, UserView, asny_test, requests_test, user_all,video,user_all,calender,
-  redirect_view
+  redirect_view,position_fix,position_fix2
 )
 
 app_name ='accounts'
 
 urlpatterns = [
+    path('position/', position_fix, name='position'),
+    path('position2/', position_fix2, name='position2'),
     path('home/', HomeView.as_view(), name='home'),
     path('redirect/', redirect_view, name='redirect_view'),
     path('regist/', RegistUserView.as_view(), name='regist'),

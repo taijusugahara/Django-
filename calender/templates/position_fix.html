@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+  body {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin:0;
+  }
+  
+  .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-color: pink;
+  }
+  
+  .footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: aqua;
+    height: 50px;
+  }
+  .header, .footer {
+    text-align: center;
+    color: white;
+  }
+  .main {
+    position: absolute;
+    left: 0;
+    top: 100px;
+    bottom: 50px;
+    width: 100%;
+    background-color: yellow;
+    color: red;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  input[type='text'] {
+    font-size: 16px;
+  }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div >
+      <div>Hello</div>
+    </div>
+  </div>
+  <div class="main">
+      <!-- <div style="height: 200px; width:100vw; background-color: blue ">Hello</div>
+      <div style="height: 200px; width:100vw; background-color: green ">Hello</div>
+      <div style="height: 200px; width:100vw; background-color: gray ">Hello</div>
+      <div style="height: 200px; width:100vw; background-color: yellow ">Hello</div>
+      <div style="height: 200px; width:100vw; background-color: red">Hello</div> -->
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+  </div>
+
+  <div class="footer" >
+    <input class="footer_input" type="text">
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+  <script>
+    $(function(){
+      //ios fixed keyboard 問題 fixedを使うのではなくabsolute使用 下参考
+      //https://medium.com/@im_rahul/safari-and-position-fixed-978122be5f29
+      //visualViewport.heightでkeyboardを除いた高さ
+      $(".footer_input").on('focus',function(){
+        var window_height = $(window).height()
+        setTimeout(function() { //これ必要
+          var height_without_keyboard = visualViewport.height
+          var height_keyboard = window_height - height_without_keyboard
+          $(".header").css("position","static")
+          //headerをmainないに移動させる(headerの固定を解除する場合は)
+          $('.header').prependTo('.main');
+          $(".main").css("top",0)
+          var main_scroll_height = $(".main").scrollTop()
+          //if (main_scroll_height > 100){
+          $(".main").scrollTop(main_scroll_height + 100)//header分(windowではなくmain)
+          //}
+          //else{
+            //$(".main").scrollTop(0)
+          //}
+          $("body").css({"bottom":height_keyboard})
+          $(window).scrollTop(0);
+        }, 200);
+      })
+      $(".footer_input").on('blur',function(){
+        $(".header").css("position","absolute")
+        //headerをmainの外(mainの前)に移動する
+        $('.header').insertBefore('.main');
+        $(".main").css("top","100px")
+        var main_scroll_height = $(".main").scrollTop()
+        $(".main").scrollTop(main_scroll_height - 100)//header分(windowではなくmain)
+        $("body").css("bottom",0)
+      })
+    })
+  </script>
+</body>
+</html>
