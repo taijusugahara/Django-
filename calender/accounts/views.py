@@ -24,6 +24,7 @@ import requests
 import urllib
 
 from .models import Users
+from django.contrib.auth.decorators import login_required
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -56,8 +57,6 @@ def video(request):
 
 
 # Create your views here.
-
-
 
 class HomeView(TemplateView):
   template_name = 'home.html'
@@ -157,6 +156,7 @@ def user_all(request):
       'users' : users
     })
 
+@login_required
 def calender(request):
   return render(request,'calender.html')
 

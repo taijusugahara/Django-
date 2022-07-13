@@ -18,10 +18,10 @@ class TestUrls(TestCase):
   
 
   #関数ベースビュー
-  def test_post_home_url_func_view(self):
-    view = resolve('/accounts/func_view/')
-    self.assertEqual(view.func, views.func_view)
+  def test_post_position_url_func_view(self):
+    view = resolve('/accounts/position/')
+    self.assertEqual(view.func, views.position_fix)
 
-  def test_post_home_url_func_view_name(self):
-    view = reverse('accounts:func_view')
-    self.assertEqual(resolve(view).func, views.func_view)
+  # def test_post_position2_url_func_view_name(self):
+  #   view = reverse('accounts:func_view')
+  #   self.assertEqual(resolve(view).func, views.func_view)

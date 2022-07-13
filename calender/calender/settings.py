@@ -150,9 +150,9 @@ STATICFILES_DIRS = [
 AUTH_USER_MODEL = 'accounts.Users'
 
 
-LOGIN_URL =  '/accounts/user_login' #ログインのurl
-LOGIN_REDIRECT_URL = '/accounts/home' #ログイン成功後のurl
-LOGOUT_REDIRECT_URL = '/accounts/user_login' #ログアウト後のurl
+LOGIN_URL =  '/accounts/user_login/' #ログインのurl
+LOGIN_REDIRECT_URL = '/accounts/home/' #ログイン成功後のurl
+LOGOUT_REDIRECT_URL = '/accounts/user_login/' #ログアウト後のurl
 
 # SESSION_COOKIE_AGE = 5 #セッション保存時間 #デフォルトは2週間
 
